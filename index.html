@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WhiplashAR - Home</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+  <div class="container">
+    <header>
+  <h1>Home</h1>
+
+  <!-- Burger Button -->
+  <button class="burger" id="burger">&#9776;</button>
+
+  <!-- Nav Menu -->
+  <nav id="nav-menu">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="try-ar.html">Try in AR</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+    <main>
+      <h2>Welcome to WhiplashAR Treats!</h2>
+      <p>Experience desserts like never before. View and explore our sweet treats in Augmented Reality!</p>
+      <video controls width="100%">
+        <source src="assets/videos/intro.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </main>
+  </div>
+
+  <script>
+  const burger = document.getElementById('burger');
+  const navMenu = document.getElementById('nav-menu');
+
+  burger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

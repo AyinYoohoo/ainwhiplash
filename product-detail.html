@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dessert Details</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link rel="stylesheet" href="styles/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+  <h1>Product Details</h1>
+
+  <!-- Burger Button -->
+  <button class="burger" id="burger">&#9776;</button>
+
+  <!-- Nav Menu -->
+  <nav id="nav-menu">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="try-ar.html">Try in AR</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+  <main>
+    <section class="product-detail">
+      <h2>Ain Donut</h2>
+      <model-viewer src="assets/models/dessert_model.glb" alt="Strawberry Cheesecake" auto-rotate camera-controls ar></model-viewer>
+      <audio controls>
+        <source src="assets/audio/dessert_audio.mp3" type="audio/mp3">
+      </audio>
+    </section>
+
+    <section class="product-detail">
+      <h2>Yiyin Donut</h2>
+      <model-viewer src="assets/models/chocolate.glb" alt="Chocolate Lava Cake" auto-rotate camera-controls ar></model-viewer>
+      <audio controls>
+        <source src="assets/audio/dessert_audio.mp3" type="audio/mp3">
+      </audio>
+    </section>
+  </main>
+
+  <script>
+  const burger = document.getElementById('burger');
+  const navMenu = document.getElementById('nav-menu');
+
+  burger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

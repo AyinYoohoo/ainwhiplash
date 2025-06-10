@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Try in AR - SweetAR Treats</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+        "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+
+  <style>
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+    button {
+      margin: 1rem;
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background-color: #d94088;
+    }
+    #ar-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999;
+      background-color: black;
+    }
+    #marker-section img {
+      width: 300px;
+      border: 4px dashed #a83279;
+      border-radius: 12px;
+    }
+    .hidden { display: none !important; }
+    #exit-btn-fixed {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 10px 15px;
+      background-color: #ff69b4;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1002;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Try in AR</h1>
+    <button class="burger" id="burger">&#9776;</button>
+    <nav id="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="try-ar.html">Try in AR</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="marker-section">
+      <h2>Scan These Markers To Try AR 🍩🌝</h2>
+      <div>
+        <h3>Donut</h3>
+        <img src="./assets/marker/donut.jpg" alt="Donut Marker" />
+        <br />
+        <a href="./assets/marker/donut.jpg" download><button>Download Donut Marker</button></a>
+      </div>
+      <div>
+        <h3>Cupcake</h3>
+        <img src="./assets/marker/coco.jpg" alt="Cupcake Marker" />
+        <br />
+        <a href="./assets/marker/coco.jpg" download><button>Download Cupcake Marker</button></a>
+      </div>
+    </section>
+
+    <button id="start-ar-btn">✨ Start AR Experience</button>
+    <button id="stop-ar-btn" class="hidden">❌ Exit AR</button>
+    <button id="resize-ar-btn" class="hidden">🔍 Toggle Size</button>
+    <button id="exit-btn-fixed">Exit</button>
+
+    <div id="ar-container"></div>
+  </main>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { MindARThree } from 'mindar-image-three';
+
+    const startBtn = document.getElementById('start-ar-btn');
+    const stopBtn = document.getElementById('stop-ar-btn');
+    const resizeBtn = document.getElementById('resize-ar-btn');
+    const exitFixedBtn = document.getElementById('exit-btn-fixed');
+    const arContainer = document.getElementById('ar-container');
+    const markerSection = document.getElementById('marker-section');
+
+    let mindarThree, renderer, scene, camera;
+    let donutModel, cupcakeModel;
+    let isFullscreen = true;
+
+    startBtn.addEventListener('click', async () => {
+      startBtn.classList.add('hidden');
+      stopBtn.classList.remove('hidden');
+      resizeBtn.classList.remove('hidden');
+      exitFixedBtn.style.display = 'block';
+      markerSection.classList.add('hidden');
+      arContainer.style.display = 'block';
+
+      mindarThree = new MindARThree({
+        container: arContainer,
+        imageTargetSrc: "./assets/marker/mix.mind",
+      });
+
+      ({ renderer, scene, camera } = mindarThree);
+
+      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+      scene.add(light);
+
+      const loader = new GLTFLoader();
+
+      const anchor0 = mindarThree.addAnchor(0);
+      loader.load('./assets/models/chocolate.glb', (gltf) => {
+        donutModel = gltf.scene;
+        donutModel.scale.set(0.5, 0.5, 0.5);
+        anchor0.group.add(donutModel);
+      });
+
+      const anchor1 = mindarThree.addAnchor(1);
+      loader.load('./assets/models/chocolate_donut.glb', (gltf) => {
+        cupcakeModel = gltf.scene;
+        cupcakeModel.scale.set(0.5, 0.5, 0.5);
+        anchor1.group.add(cupcakeModel);
+      });
+
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => renderer.render(scene, camera));
+    });
+
+    async function stopAR() {
+      if (mindarThree) {
+        renderer.setAnimationLoop(null);
+        await mindarThree.stop();
+        renderer.dispose();
+        mindarThree = null;
+      }
+      document.querySelectorAll('.mindar-ui-overlay, .mindar-ui-scanner, .mindar-ui-loading').forEach(el => el.remove());
+      arContainer.innerHTML = '';
+      arContainer.style.display = 'none';
+      stopBtn.classList.add('hidden');
+      resizeBtn.classList.add('hidden');
+      exitFixedBtn.style.display = 'none';
+      startBtn.classList.remove('hidden');
+      markerSection.classList.remove('hidden');
+    }
+
+    stopBtn.addEventListener('click', stopAR);
+    exitFixedBtn.addEventListener('click', stopAR);
+
+    resizeBtn.addEventListener('click', () => {
+      if (isFullscreen) {
+        arContainer.style.width = '80vw';
+        arContainer.style.height = '60vh';
+        arContainer.style.top = '10vh';
+        arContainer.style.left = '10vw';
+      } else {
+        arContainer.style.width = '100vw';
+        arContainer.style.height = '100vh';
+        arContainer.style.top = '0';
+        arContainer.style.left = '0';
+      }
+      isFullscreen = !isFullscreen;
+    });
+
+    const scaleModel = (model, scaleFactor) => {
+      if (!model) return;
+      const newScale = model.scale.x * scaleFactor;
+      const clamped = Math.min(Math.max(newScale, 0.2), 2);
+      model.scale.set(clamped, clamped, clamped);
+    };
+
+    renderer?.domElement?.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const factor = e.deltaY < 0 ? 1.05 : 0.95;
+      if (donutModel?.parent?.visible) scaleModel(donutModel, factor);
+      if (cupcakeModel?.parent?.visible) scaleModel(cupcakeModel, factor);
+    });
+
+    let initialPinchDistance = null;
+    renderer?.domElement?.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (initialPinchDistance === null) {
+          initialPinchDistance = distance;
+        } else {
+          const factor = distance > initialPinchDistance ? 1.02 : 0.98;
+          if (donutModel?.parent?.visible) scaleModel(donutModel, factor);
+          if (cupcakeModel?.parent?.visible) scaleModel(cupcakeModel, factor);
+          initialPinchDistance = distance;
+        }
+      }
+    });
+    renderer?.domElement?.addEventListener('touchend', () => {
+      initialPinchDistance = null;
+    });
+
+    const burger = document.getElementById('burger');
+    const navMenu = document.getElementById('nav-menu');
+    burger.addEventListener('click', () => navMenu.classList.toggle('active'));
+  </script>
+</body>
+</html>
