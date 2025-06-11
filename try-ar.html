@@ -81,16 +81,26 @@
     <section id="marker-section">
       <h2>Scan These Markers To Try AR 🍩🌝</h2>
       <div>
-        <h3>Donut</h3>
+        <h3>Frosted Donuts</h3>
         <img src="./assets/marker/donut.jpg" alt="Donut Marker" />
         <br />
         <a href="./assets/marker/donut.jpg" download><button>Download Donut Marker</button></a>
       </div>
       <div>
-        <h3>Cupcake</h3>
-        <img src="./assets/marker/coco.jpg" alt="Cupcake Marker" />
+        <h3>Chocolate Donuts</h3>
+        <img src="./assets/marker/coco.jpg" alt="Donut Marker" />
         <br />
-        <a href="./assets/marker/coco.jpg" download><button>Download Cupcake Marker</button></a>
+        <a href="./assets/marker/coco.jpg" download><button>Download Donut Marker</button></a>
+        <h3>Blueberry Donuts</h3>
+        <img src="./assets/marker/blued.jpg" alt="Donut Marker" />
+        <br />
+        <a href="./assets/marker/blued.jpg" download><button>Download Donut Marker</button></a>
+      </div>
+      <div>
+        <h3>Cinnamon Donuts</h3>
+        <img src="./assets/marker/cinnamon.jpg" alt="Donut Marker" />
+        <br />
+        <a href="./assets/marker/cinnamon.jpg" download><button>Download Donut Marker</button></a>
       </div>
     </section>
 
@@ -115,8 +125,49 @@
     const markerSection = document.getElementById('marker-section');
 
     let mindarThree, renderer, scene, camera;
-    let donutModel, cupcakeModel;
+    let frostedModel, chocolateModel, blueberryModel, cinnamonModel;
     let isFullscreen = true;
+
+    let speakInterval = null;
+
+    window.addEventListener('resize', () => {
+    const width = arContainer.clientWidth;
+    const height = arContainer.clientHeight;
+
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  });
+
+    const speak = (text) => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 1;
+      utterance.pitch = 1.2;
+
+      const voices = window.speechSynthesis.getVoices();
+      const femaleVoice = voices.find(voice =>
+        voice.name.includes("Female") || voice.name.includes("Zira") || voice.name.includes("Samantha") || voice.name.includes("Google UK English Female")
+      );
+      if (femaleVoice) {
+        utterance.voice = femaleVoice;
+      }
+
+      window.speechSynthesis.cancel(); // Stop any current speech
+      window.speechSynthesis.speak(utterance);
+    };
+
+  const speakLoop = (text) => {
+    if (speakInterval) clearInterval(speakInterval);
+    speak(text); // Speak once immediately
+    speakInterval = setInterval(() => {
+      speak(text);
+  },   7000); // Repeat every 7 seconds
+};
+
+    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+    }
 
     startBtn.addEventListener('click', async () => {
       startBtn.classList.add('hidden');
@@ -128,7 +179,7 @@
 
       mindarThree = new MindARThree({
         container: arContainer,
-        imageTargetSrc: "./assets/marker/mix.mind",
+        imageTargetSrc: "./assets/marker/targets.mind",
       });
 
       ({ renderer, scene, camera } = mindarThree);
@@ -139,22 +190,117 @@
       const loader = new GLTFLoader();
 
       const anchor0 = mindarThree.addAnchor(0);
-      loader.load('./assets/models/chocolate.glb', (gltf) => {
-        donutModel = gltf.scene;
-        donutModel.scale.set(0.5, 0.5, 0.5);
-        anchor0.group.add(donutModel);
+      loader.load('./assets/models/frosted.glb', (gltf) => {
+        frostedModel = gltf.scene;
+        frostedModel.scale.set(0.5, 0.5, 0.5);
+        anchor0.group.add(frostedModel);
       });
+      anchor0.onTargetFound = () => {
+        speakLoop("This is a frosted donut. A rich and fluffy treat with creamy filling.");
+      };
+      anchor0.onTargetLost = () => {
+      window.speechSynthesis.cancel(); // Stop narration
+      clearInterval(speakInterval);
+};
 
       const anchor1 = mindarThree.addAnchor(1);
       loader.load('./assets/models/chocolate_donut.glb', (gltf) => {
-        cupcakeModel = gltf.scene;
-        cupcakeModel.scale.set(0.5, 0.5, 0.5);
-        anchor1.group.add(cupcakeModel);
+        chocolateModel = gltf.scene;
+        chocolateModel.scale.set(0.5, 0.5, 0.5);
+        anchor1.group.add(chocolateModel);
       });
+      anchor1.onTargetFound = () => {
+        speakLoop("This is a chocolate donut. A delicious dessert topped with sweet glaze.");
+      };
+      anchor1.onTargetLost = () => {
+      window.speechSynthesis.cancel(); // Stop narration
+      clearInterval(speakInterval);
+};
+    const anchor2 = mindarThree.addAnchor(2);
+    loader.load('./assets/models/blue_donut.glb', (gltf) => {
+      blueberryModel = gltf.scene;
+
+      // Create a stable wrapper group
+      const groupWrapper = new THREE.Group();
+      const modelWrapper = new THREE.Group();
+      modelWrapper.add(blueberryModel);
+      groupWrapper.add(modelWrapper);
+
+      // Re-center the model inside modelWrapper
+      const box = new THREE.Box3().setFromObject(blueberryModel);
+      const center = box.getCenter(new THREE.Vector3()).negate();
+      blueberryModel.position.copy(center);
+
+      // Apply uniform scale to modelWrapper
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scaleFactor = 0.5 / maxDim; // adjust scale if needed
+      modelWrapper.scale.setScalar(scaleFactor);
+
+      // Add groupWrapper to anchor (not model directly)
+      anchor2.group.add(groupWrapper);
+    });
+
+    anchor2.onTargetFound = () => {
+      speakLoop("This is a blueberry donut. A rich and fluffy treat with delicious blueberry top.");
+    };
+    anchor2.onTargetLost = () => {
+      window.speechSynthesis.cancel();
+      clearInterval(speakInterval);
+    };
+
+
+      const anchor3 = mindarThree.addAnchor(3);
+      loader.load('./assets/models/donut_c.glb', (gltf) => {
+      cinnamonModel = gltf.scene;
+
+      // Create a stable wrapper group
+      const groupWrapper = new THREE.Group();
+      const modelWrapper = new THREE.Group();
+      groupWrapper.add(modelWrapper);
+      modelWrapper.add(cinnamonModel);
+
+      // Re-center model based on bounding box
+      const box = new THREE.Box3().setFromObject(cinnamonModel);
+      const center = box.getCenter(new THREE.Vector3()).negate();
+      cinnamonModel.position.copy(center);
+
+      // Uniformly scale modelWrapper
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 0.5 / maxDim;
+      modelWrapper.scale.setScalar(scale);
+
+      anchor3.group.add(groupWrapper);
+    });
+
+    anchor3.onTargetFound = () => {
+      speakLoop("This is a cinnamon donut. A delicious dessert coated with cinnamon sauces.");
+    };
+    anchor3.onTargetLost = () => {
+      window.speechSynthesis.cancel();
+      clearInterval(speakInterval);
+    };
+
 
       await mindarThree.start();
-      renderer.setAnimationLoop(() => renderer.render(scene, camera));
-    });
+      renderer.setAnimationLoop(() => {
+      if (frostedModel && frostedModel.parent?.visible) {
+        frostedModel.rotation.y += 0.03;
+      }
+      if (chocolateModel && chocolateModel.parent?.visible) {
+        chocolateModel.rotation.y += 0.03;
+      }
+      if (blueberryModel && blueberryModel.parent?.visible) {
+        blueberryModel.rotation.y += 0.03;
+      }
+      if (cinnamonModel && cinnamonModel.parent?.visible) {
+        cinnamonModel.rotation.y += 0.03;
+      }
+
+  renderer.render(scene, camera);
+  });
+});
 
     async function stopAR() {
       if (mindarThree) {
@@ -163,6 +309,9 @@
         renderer.dispose();
         mindarThree = null;
       }
+      window.speechSynthesis.cancel();
+      clearInterval(speakInterval);
+
       document.querySelectorAll('.mindar-ui-overlay, .mindar-ui-scanner, .mindar-ui-loading').forEach(el => el.remove());
       arContainer.innerHTML = '';
       arContainer.style.display = 'none';
@@ -201,8 +350,11 @@
     renderer?.domElement?.addEventListener('wheel', (e) => {
       e.preventDefault();
       const factor = e.deltaY < 0 ? 1.05 : 0.95;
-      if (donutModel?.parent?.visible) scaleModel(donutModel, factor);
-      if (cupcakeModel?.parent?.visible) scaleModel(cupcakeModel, factor);
+      if (frostedModel?.parent?.visible) scaleModel(frostedModel, factor);
+      if (chocolateModel?.parent?.visible) scaleModel(chocolateModel, factor);
+      if (blueberryModel?.parent?.visible) scaleModel(blueberryModel, factor);
+      if (cinnamonModel?.parent?.visible) scaleModel(cinnamonModel, factor);
+
     });
 
     let initialPinchDistance = null;
@@ -215,8 +367,11 @@
           initialPinchDistance = distance;
         } else {
           const factor = distance > initialPinchDistance ? 1.02 : 0.98;
-          if (donutModel?.parent?.visible) scaleModel(donutModel, factor);
-          if (cupcakeModel?.parent?.visible) scaleModel(cupcakeModel, factor);
+          if (frostedModel?.parent?.visible) scaleModel(frostedModel, factor);
+          if (chocolateModel?.parent?.visible) scaleModel(chocolateModel, factor);
+          if (blueberryModel?.parent?.visible) scaleModel(blueberryModel, factor);
+          if (cinnamonModel?.parent?.visible) scaleModel(cinnamonModel, factor);
+
           initialPinchDistance = distance;
         }
       }
@@ -228,6 +383,6 @@
     const burger = document.getElementById('burger');
     const navMenu = document.getElementById('nav-menu');
     burger.addEventListener('click', () => navMenu.classList.toggle('active'));
-  </script>
+    </script>
 </body>
 </html>
