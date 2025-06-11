@@ -26,30 +26,103 @@
 
   <main>
     <section class="product-detail">
-      <h2>Ain Donut</h2>
-      <model-viewer src="assets/models/chocolate_donut.glb" alt="Strawberry Cheesecake" auto-rotate camera-controls ar></model-viewer>
-      <audio controls>
-        <source src="assets/audio/dessert_audio.mp3" type="audio/mp3">
-      </audio>
+      <h2>Chocolate Donut</h2>
+      <!--Price -->
+        <p class="product-price">RM3.50</p>
+      <!-- 3D Model -->
+        <model-viewer src="assets/models/chocolate_donut.glb" alt="Strawberry Cheesecake" auto-rotate camera-controls ar></model-viewer>
+      <!-- Description -->
+        <p class="product-description">
+          This chocolate donut is a rich and indulgent pastry coated in smooth, velvety chocolate glaze. Its moist, cakey texture pairs perfectly with the deep cocoa flavor, making it a favorite for chocolate lovers.
+        </p>
+      <!-- Audio -->
+        <audio class="product-audio">
+          <source src="assets/audio/chocolate_donut_audio.mp3" type="audio/mp3">
+        </audio>
+      <button class="play-button">▶️</button>
     </section>
 
     <section class="product-detail">
-      <h2>Yiyin Donut</h2>
+      <h2>Strawberry Donut</h2>
+      <p class="product-price">RM3.50</p>
       <model-viewer src="assets/models/chocolate.glb" alt="Chocolate Lava Cake" auto-rotate camera-controls ar></model-viewer>
-      <audio controls>
-        <source src="assets/audio/dessert_audio.mp3" type="audio/mp3">
+      <p class="product-description">
+          This strawberry donut is a soft, fluffy treat topped with a smooth layer of sweet strawberry glaze. Its vibrant pink coating adds a fruity burst of flavor, making each bite both refreshing and indulgent.
+      </p>
+      <audio class="product-audio">
+        <source src="assets/audio/strawberry_donut_audio.mp3" type="audio/mp3">
       </audio>
+      <button class="play-button">▶️</button>
+    </section>
+
+    <section class="product-detail">
+      <h2>Candy Sprinkle Donut</h2>
+      <p class="product-price">RM4.50</p>
+      <model-viewer src="assets/models/candy_donut.glb" alt="Candy Sprinkled Cake" auto-rotate camera-controls ar></model-viewer>
+      <p class="product-description">
+          This candy sprinkle donut is a sweet delight with a soft, fluffy dough base, coated in a smooth layer of glossy pink frosting. It's topped with a cheerful mix of colorful candy sprinkles that add a playful crunch to every bite, making it as fun to look at as it is to eat.
+      </p>
+      <audio class="product-audio">
+        <source src="assets/audio/candy_sprinkle_donut_audio.mp3" type="audio/mp3">
+      </audio>
+      <button class="play-button">▶️</button>
+    </section>
+
+    <section class="product-detail">
+      <h2>Chocolate Sundae Cone</h2>
+      <p class="product-price">RM8</p>
+      <model-viewer src="assets/models/sundae_cone.glb" alt="sundae_cone" auto-rotate camera-controls ar></model-viewer>
+      <p class="product-description">
+          This sundae cone features a creamy swirl of vanilla ice cream nestled in a crisp waffle cone, crowned with a juicy red cherry and crumbled Oreo biscuit pieces. The rich chocolate and cookie crunch perfectly complement the smooth, cold sweetness, making every bite a delicious mix of flavor and texture.
+      </p>
+      <audio class="product-audio">
+        <source src="assets/audio/sundae_cone_audio.mp3" type="audio/mp3">
+      </audio>
+      <button class="play-button">▶️</button>
     </section>
   </main>
 
   <script>
-  const burger = document.getElementById('burger');
-  const navMenu = document.getElementById('nav-menu');
+  document.addEventListener('DOMContentLoaded', () => {
+    const playButtons = document.querySelectorAll('.play-button');
 
-  burger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+    playButtons.forEach(button => {
+      const section = button.closest('.product-detail');
+      const audio = section.querySelector('.product-audio');
+
+      // Reset button when audio ends
+      audio.addEventListener('ended', () => {
+        button.textContent = '▶️';
+      });
+
+      button.addEventListener('click', () => {
+        // Pause all other audios and reset their buttons
+        document.querySelectorAll('.product-audio').forEach(otherAudio => {
+          if (otherAudio !== audio) {
+            otherAudio.pause();
+            otherAudio.currentTime = 0;
+          }
+        });
+
+        document.querySelectorAll('.play-button').forEach(otherButton => {
+          if (otherButton !== button) {
+            otherButton.textContent = '▶️';
+          }
+        });
+
+        // Toggle current audio
+        if (audio.paused) {
+          audio.play();
+          button.textContent = '⏸️';
+        } else {
+          audio.pause();
+          button.textContent = '▶️';
+        }
+      });
+    });
   });
-</script>
+
+  </script>
 
 </body>
 </html>
