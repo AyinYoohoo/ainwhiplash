@@ -190,7 +190,7 @@
       const loader = new GLTFLoader();
 
       const anchor0 = mindarThree.addAnchor(0);
-      loader.load('./assets/models/chocolate_donut.glb', (gltf) => {
+      loader.load('./assets/models/frosted.glb', (gltf) => {
         frostedModel = gltf.scene;
         frostedModel.scale.set(0.5, 0.5, 0.5);
         anchor0.group.add(frostedModel);
@@ -204,7 +204,7 @@
 };
 
       const anchor1 = mindarThree.addAnchor(1);
-      loader.load('./assets/models/frosted.glb', (gltf) => {
+      loader.load('./assets/models/chocolate_donut.glb', (gltf) => {
         chocolateModel = gltf.scene;
         chocolateModel.scale.set(0.5, 0.5, 0.5);
         anchor1.group.add(chocolateModel);
