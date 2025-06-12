@@ -130,6 +130,12 @@
   function checkout(productName, price) {
     alert(`You selected ${productName}.\nTotal: RM${price.toFixed(2)}\nProceeding to checkout...`);
   }
+const burger = document.getElementById('burger');
+const navMenu = document.getElementById('nav-menu');
+
+burger.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
 
 
 
