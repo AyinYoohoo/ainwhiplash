@@ -139,11 +139,12 @@ form button:hover {
   cursor: pointer;
 }
 
-/* Checkout button */
+/* Checkout button, play button */
+.play-button ,
 .checkout-button {
   display: inline-block;
   margin-top: 20px;
-  padding: 14px 28px;
+  padding: 14px 20px;
   background-color: #ff5e78;
   color: white;
   border: none;
@@ -154,11 +155,15 @@ form button:hover {
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
+.play-button{
+  padding: 11px 28px 14px 28px;
+}
+
+.play-button:hover,
 .checkout-button:hover {
   background-color: #e14b65;
   transform: scale(1.05);
 }
-
 
 /* --- Responsive Design --- */
 @media only screen and (max-width: 768px) {
