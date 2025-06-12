@@ -139,6 +139,26 @@ form button:hover {
   cursor: pointer;
 }
 
+/* Checkout button */
+.checkout-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background-color: #ff5e78;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.checkout-button:hover {
+  background-color: #e14b65;
+  transform: scale(1.05);
+}
+
 
 /* --- Responsive Design --- */
 @media only screen and (max-width: 768px) {
@@ -356,4 +376,3 @@ nav a:hover {
     border-bottom: 1px solid #eee;
   }
 }
-
