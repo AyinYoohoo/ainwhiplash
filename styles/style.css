@@ -227,42 +227,7 @@ form button:hover {
     font-size: 0.95em;
   }
 }
-/* Mobile nav hidden by default */
-#nav-menu {
-  display: none;
-  flex-direction: column;
-  background-color: #fff;
-  padding: 10px;
-}
 
-/* Show when active */
-#nav-menu.active {
-  display: flex;
-}
-
-/* Burger button only visible on mobile */
-.burger {
-  display: none;
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Responsive breakpoint */
-@media screen and (max-width: 768px) {
-  .burger {
-    display: block;
-  }
-
-  nav {
-    display: none;
-  }
-
-  nav.active {
-    display: flex;
-  }
-}
 
 /* --- Product Grid Layout --- */
 .product-grid {
