@@ -40,6 +40,7 @@
           <source src="assets/audio/chocolate_donut_audio.mp3" type="audio/mp3">
         </audio>
       <button class="play-button">▶️</button>
+      <button class="checkout-button" onclick="checkout('Chocolate Donut', 3.50)">Check Out</button>
     </section>
 
     <section class="product-detail" id="strawberry-donut">
@@ -53,6 +54,7 @@
         <source src="assets/audio/strawberry_donut_audio.mp3" type="audio/mp3">
       </audio>
       <button class="play-button">▶️</button>
+      <button class="checkout-button" onclick="checkout('Strawberry Donut', 3.50)">Check Out</button>
     </section>
 
     <section class="product-detail" id="candy-sprinkle-donut">
@@ -66,6 +68,7 @@
         <source src="assets/audio/candy_sprinkle_donut_audio.mp3" type="audio/mp3">
       </audio>
       <button class="play-button">▶️</button>
+      <button class="checkout-button" onclick="checkout('Candy Sprinkle Donut', 4.50)">Check Out</button>
     </section>
 
     <section class="product-detail" id="chocolate-sundae-cone">
@@ -79,6 +82,7 @@
         <source src="assets/audio/sundae_cone_audio.mp3" type="audio/mp3">
       </audio>
       <button class="play-button">▶️</button>
+      <button class="checkout-button" onclick="checkout('Chocolate Sundae Cone', 8.00)">Check Out</button>
     </section>
   </main>
 
@@ -121,6 +125,13 @@
       });
     });
   });
+
+  // checkout function
+  function checkout(productName, price) {
+    alert(`You selected ${productName}.\nTotal: RM${price.toFixed(2)}\nProceeding to checkout...`);
+  }
+
+
 
   </script>
 
