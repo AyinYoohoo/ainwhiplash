@@ -432,7 +432,7 @@
                   description = "This is a bubblegum donut. A fun and colorful treat with a sweet bubblegum flavor.";
                   // Adjust model when target is found
                   if (models.bubblegum) {
-                    models.bubblegum.scale.set(0.003, 0.003, 0.003);
+                    models.bubblegum.scale.set(0.005, 0.005, 0.005);
                     models.bubblegum.position.set(0, 0, 0);
                     models.bubblegum.rotation.set(0, 0, 0);
                   }
@@ -449,7 +449,7 @@
               clearInterval(speakInterval);
               // Reset model scale when target is lost
               if (config.name === 'bubblegum' && models.bubblegum) {
-                models.bubblegum.scale.set(0.003, 0.003, 0.003);
+                models.bubblegum.scale.set(0.005, 0.005, 0.005);
               }
             };
           });
