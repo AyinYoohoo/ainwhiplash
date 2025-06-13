@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - WhiplashAR Treats</title>
+  <link rel="stylesheet" href="styles/style.css?v=2">
+    <link rel="icon" href="assets/images/logo.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes magic-glow {
+      0% {
+        text-shadow:
+          2px 2px 0 #fff,
+          -2px -2px 0 #fff,
+          2px -2px 0 #fff,
+          -2px 2px 0 #fff,
+          0 0 8px #ff4d6d,
+          0 2px 8px #fff;
+      }
+      50% {
+        text-shadow:
+          2px 2px 0 #fff,
+          -2px -2px 0 #fff,
+          2px -2px 0 #fff,
+          -2px 2px 0 #fff,
+          0 0 18px #ffb3c6,
+          0 2px 16px #fff6fa;
+      }
+      100% {
+        text-shadow:
+          2px 2px 0 #fff,
+          -2px -2px 0 #fff,
+          2px -2px 0 #fff,
+          -2px 2px 0 #fff,
+          0 0 12px #ff6eb5,
+          0 2px 12px #fff;
+      }
+    }
+
+    .icing-header {
+      width: 100%;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      margin-bottom: 0;
+      padding: 0 32px 0 0;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      background: none;
+    }
+
+    .icing-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('assets/images/icing-header.png') top center repeat-x;
+      background-size: 100% auto;
+      transition: all 0.3s ease;
+      z-index: -1;
+      opacity: 1;
+    }
+
+    .icing-header.scrolled {
+      background: none;
+    }
+
+    .icing-header.scrolled::before {
+      transform: translateY(-20px);
+      opacity: 1;
+    }
+
+    .hero-logo-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-logo {
+      height: 70px;
+      width: 70px;
+      object-fit: contain;
+      background: none;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(255, 77, 109, 0.10);
+      margin-left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hero-logo:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .hero-site-name {
+      font-family: 'Pacifico', cursive, sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffb3c6;
+      text-shadow:
+        2px 2px 0 #fff,
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        0 0 8px #ff4d6d,
+        0 2px 8px #fff;
+      letter-spacing: 0.5px;
+      margin-left: 0.5rem;
+      position: relative;
+      animation: magic-glow 2.5s infinite alternate;
+      transition: transform 0.2s;
+    }
+
+    .logo-link {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .logo-link:hover .hero-site-name {
+      transform: scale(1.08) rotate(-2deg);
+      filter: brightness(1.2) drop-shadow(0 0 12px #fff6fa);
+      animation: magic-glow 0.7s infinite alternate;
+    }
+
+    .hero-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .hero-nav a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      text-shadow: 1px 1px 8px #ff4d6d, 0 2px 8px #fff;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 8px 20px;
+      border-radius: 25px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-nav a:hover {
+      color: #fff;
+      text-shadow: 1px 1px 8px #ff4d6d, 0 2px 8px #fff;
+    }
+
+    main {
+      padding: 2rem;
+      margin-top: 160px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem auto;
+    }
+
+    .contact-info {
+      border-radius: 2rem;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .contact-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('assets/images/pattern.png') repeat;
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    .contact-form {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      padding: 3rem;
+      box-shadow: 
+        0 8px 32px rgba(255, 77, 109, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+
+    .contact-form::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('assets/images/pattern.png') repeat;
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    .contact-info h2, .contact-form h2 {
+      font-size: 2.5rem;
+      color: #ff4d6d;
+      margin-bottom: 2rem;
+      text-align: center;
+      text-shadow: 
+        2px 2px 4px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 77, 109, 0.4);
+      position: relative;
+      z-index: 1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .contact-info p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #1a1a1a;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-method:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 4px 16px rgba(255, 77, 109, 0.1);
+    }
+
+    .contact-method i {
+      font-size: 1.5rem;
+      color: #ff4d6d;
+      width: 2rem;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      color: #ff4d6d;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: #ff4d6d;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(255, 77, 109, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid rgba(255, 77, 109, 0.2);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.5);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #ff4d6d;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 16px rgba(255, 77, 109, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      background: #ffb3c6;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border-radius: 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 4px 16px rgba(255, 77, 109, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: #ff6eb5;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 
+        0 8px 24px rgba(255, 77, 109, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 900px) {
+      .icing-nav-inner {
+        padding: 0 1rem;
+        height: 70px;
+      }
+      .hero-logo {
+        height: 40px;
+        width: 40px;
+      }
+      .hero-site-name {
+        font-size: 1.1rem;
+      }
+      .hero-nav {
+        gap: 1rem;
+      }
+      .hero-nav a {
+        font-size: 1rem;
+        padding: 6px 15px;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      .contact-info, .contact-form {
+        padding: 2rem;
+      }
+      .contact-info h2, .contact-form h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .icing-nav-inner {
+        flex-direction: column;
+        height: auto;
+        gap: 0.3rem;
+        padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+      }
+      .hero-nav {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-nav a {
+        font-size: 0.9rem;
+        padding: 5px 12px;
+      }
+      .contact-info h2, .contact-form h2 {
+        font-size: 1.8rem;
+      }
+      .contact-method {
+        padding: 0.8rem;
+      }
+      .social-links a {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+  <script>
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.icing-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</head>
+<body class="site-bg">
+  <header class="icing-header">
+    <div class="icing-nav-inner">
+      <div class="hero-logo-title">
+        <a href="index.html" class="logo-link" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="assets/images/logo.png" alt="ARWhiplash Logo" class="hero-logo" />
+          <span class="hero-site-name">ARWhiplash</span>
+        </a>
+      </div>
+      <nav class="hero-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="try-ar.html">Try in AR</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="contact-container">
+      <section class="contact-info">
+        <h2>Get in Touch! 📬</h2>
+        <p>We'd love to hear from you! Whether you have a question about our AR experiences, want to place an order, or just want to say hello, we're here to help.</p>
+        
+        <div class="contact-methods">
+          <div class="contact-method">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>Visit Us</strong>
+              <p>123 ARWhiplash, Dessert City<br>DC 12345, United States</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <i class="fas fa-phone"></i>
+            <div>
+              <strong>Call Us</strong>
+              <p>+1 (555) 123-4567<br>Mon-Fri, 9am-6pm EST</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Email Us</strong>
+              <p>hello@arwhiplash.com<br>support@arwhiplash.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </section>
+
+      <section class="contact-form">
+        <h2>Send Us a Message! 💌</h2>
+        <form>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Send Message ✨</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>ARWhiplash</h3>
+        <p>Creating magical moments with our delicious donuts and treats. Made with love and the finest ingredients.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 ARWhiplash, Dessert City</li>
+          <li><i class="fas fa-phone"></i> +60 12-345-6789</li>
+          <li><i class="fas fa-envelope"></i> info@arwhiplash.com</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Opening Hours</h3>
+        <ul class="opening-hours">
+          <li>Monday - Friday: 8:00 AM - 8:00 PM</li>
+          <li>Saturday: 9:00 AM - 9:00 PM</li>
+          <li>Sunday: 10:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 ARWhiplash. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

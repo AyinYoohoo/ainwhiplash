@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dessert Details</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link rel="stylesheet" href="styles/style.css?v=2">
+    <link rel="icon" href="assets/images/logo.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="site-bg">
+  <header class="icing-header">
+    <div class="icing-nav-inner">
+      <div class="hero-logo-title">
+        <a href="index.html" class="logo-link" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="assets/images/logo.png" alt="ARWhiplash Logo" class="hero-logo" />
+          <span class="hero-site-name">ARWhiplash</span>
+        </a>
+      </div>
+      <nav class="hero-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="try-ar.html">Try in AR</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="product-detail" id="chocolate-donut">
+      <h2>Chocolate Donut</h2>
+      <p class="product-price">RM3.50</p>
+      <model-viewer src="assets/models/chocolate_donut.glb" alt="Chocolate Donut" auto-rotate camera-controls ar></model-viewer>
+      <p class="product-description">
+        This chocolate donut is a rich and indulgent pastry coated in smooth, velvety chocolate glaze. Its moist, cakey texture pairs perfectly with the deep cocoa flavor, making it a favorite for chocolate lovers.
+      </p>
+      <div class="audio-controls">
+        <audio class="product-audio">
+          <source src="assets/audio/chocolate_donut_audio.mp3" type="audio/mp3">
+        </audio>
+        <button class="play-button" data-product="chocolate-donut"><span>▶️</span></button>
+      </div>
+      <button class="checkout-button" onclick="checkout('Chocolate Donut', 3.50)">Check Out</button>
+    </section>
+
+    <section class="product-detail" id="strawberry-donut">
+      <h2>Strawberry Donut</h2>
+      <p class="product-price">RM3.50</p>
+      <model-viewer src="assets/models/chocolate.glb" alt="Strawberry Donut" auto-rotate camera-controls ar></model-viewer>
+      <p class="product-description">
+        This strawberry donut is a soft, fluffy treat topped with a smooth layer of sweet strawberry glaze. Its vibrant pink coating adds a fruity burst of flavor, making each bite both refreshing and indulgent.
+      </p>
+      <div class="audio-controls">
+        <audio class="product-audio">
+          <source src="assets/audio/strawberry_donut_audio.mp3" type="audio/mp3">
+        </audio>
+        <button class="play-button" data-product="strawberry-donut"><span>▶️</span></button>
+      </div>
+      <button class="checkout-button" onclick="checkout('Strawberry Donut', 3.50)">Check Out</button>
+    </section>
+
+    <section class="product-detail" id="candy-sprinkle-donut">
+      <h2>Candy Sprinkle Donut</h2>
+      <p class="product-price">RM4.50</p>
+      <model-viewer src="assets/models/candy_donut.glb" alt="Candy Sprinkled Cake" auto-rotate camera-controls ar></model-viewer>
+      <p class="product-description">
+          This candy sprinkle donut is a sweet delight with a soft, fluffy dough base, coated in a smooth layer of glossy pink frosting. It's topped with a cheerful mix of colorful candy sprinkles that add a playful crunch to every bite, making it as fun to look at as it is to eat.
+      </p>
+      <div class="audio-controls">
+        <audio class="product-audio">
+          <source src="assets/audio/candy_sprinkle_donut_audio.mp3" type="audio/mp3">
+        </audio>
+        <button class="play-button" data-product="candy-sprinkle-donut"><span>▶️</span></button>
+      </div>
+      <button class="checkout-button" onclick="checkout('Candy Sprinkle Donut', 4.50)">Check Out</button>
+    </section>
+
+    <section class="product-detail" id="chocolate-sundae-cone">
+      <h2>Chocolate Sundae Cone</h2>
+      <p class="product-price">RM8</p>
+      <model-viewer src="assets/models/sundae_cone.glb" alt="sundae_cone" auto-rotate camera-controls ar></model-viewer>
+      <p class="product-description">
+          This sundae cone features a creamy swirl of vanilla ice cream nestled in a crisp waffle cone, crowned with a juicy red cherry and crumbled Oreo biscuit pieces. The rich chocolate and cookie crunch perfectly complement the smooth, cold sweetness, making every bite a delicious mix of flavor and texture.
+      </p>
+      <div class="audio-controls">
+        <audio class="product-audio">
+          <source src="assets/audio/sundae_cone_audio.mp3" type="audio/mp3">
+        </audio>
+        <button class="play-button" data-product="chocolate-sundae-cone"><span>▶️</span></button>
+      </div>
+      <button class="checkout-button" onclick="checkout('Chocolate Sundae Cone', 8.00)">Check Out</button>
+    </section>
+
+    <section class="video-section">
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Sweet Delights</h3>
+        <p>Creating magical moments with our delicious donuts and treats. Made with love and the finest ingredients.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Sweet Street, Dessert City</li>
+          <li><i class="fas fa-phone"></i> +60 12-345-6789</li>
+          <li><i class="fas fa-envelope"></i> info@sweetdelights.com</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Opening Hours</h3>
+        <ul class="opening-hours">
+          <li>Monday - Friday: 8:00 AM - 8:00 PM</li>
+          <li>Saturday: 9:00 AM - 9:00 PM</li>
+          <li>Sunday: 10:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 Sweet Delights. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Add event listeners to all model-viewer elements
+    document.querySelectorAll('model-viewer').forEach(viewer => {
+      let exitButton = null;
+
+      viewer.addEventListener('ar-status', (event) => {
+        if (event.detail.status === 'session-started') {
+          // Create and show exit button when AR starts
+          if (!exitButton) {
+            exitButton = document.createElement('button');
+            exitButton.id = 'exit-ar-button';
+            exitButton.textContent = '❌ Exit AR';
+            exitButton.style.position = 'fixed';
+            exitButton.style.top = '20px';
+            exitButton.style.right = '20px';
+            exitButton.style.zIndex = '10000';
+            exitButton.style.padding = '0.8rem 1.5rem';
+            exitButton.style.background = '#ffb3c6';
+            exitButton.style.borderRadius = '1rem';
+            exitButton.style.fontSize = '1.1rem';
+            exitButton.style.fontWeight = '600';
+            exitButton.style.color = 'white';
+            exitButton.style.border = 'none';
+            exitButton.style.cursor = 'pointer';
+            exitButton.style.boxShadow = '0 4px 16px rgba(255, 77, 109, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1)';
+            exitButton.style.transition = 'all 0.3s ease';
+            
+            exitButton.addEventListener('mouseover', () => {
+              exitButton.style.background = '#ff6eb5';
+              exitButton.style.transform = 'translateY(-3px) scale(1.05)';
+              exitButton.style.boxShadow = '0 8px 24px rgba(255, 77, 109, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2)';
+            });
+            
+            exitButton.addEventListener('mouseout', () => {
+              exitButton.style.background = '#ffb3c6';
+              exitButton.style.transform = 'none';
+              exitButton.style.boxShadow = '0 4px 16px rgba(255, 77, 109, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1)';
+            });
+
+            exitButton.addEventListener('click', () => {
+              viewer.exitAR();
+              if (exitButton) {
+                exitButton.remove();
+                exitButton = null;
+              }
+            });
+
+            document.body.appendChild(exitButton);
+          }
+        } else if (event.detail.status === 'session-ended' || event.detail.status === 'session-failed') {
+          // Remove exit button when AR ends or fails
+          if (exitButton) {
+            exitButton.remove();
+            exitButton = null;
+          }
+        }
+      });
+    });
+
+    // Centralized state management for audio/narration
+    let activeAudioElement = null; // Stores the currently playing audio element
+    let activeSpeechUtterance = null; // Stores the currently speaking utterance
+
+    document.querySelectorAll('.play-button').forEach(button => {
+      const productDetail = button.closest('.product-detail');
+      const audio = productDetail.querySelector('.product-audio');
+      const playIcon = button.querySelector('span');
+      const title = productDetail.querySelector('h2').textContent;
+      const description = productDetail.querySelector('.product-description').textContent;
+      const textToSpeak = `${title}. ${description}`;
+
+      // Pre-fetch voices for narration (important for setting voice)
+      window.speechSynthesis.getVoices();
+
+      button.addEventListener('click', () => {
+        // 1. Check if this button is currently playing audio or speaking narration
+        const isThisButtonPlayingAudio = (activeAudioElement === audio && !audio.paused);
+        const isThisButtonSpeakingNarration = (activeSpeechUtterance && window.speechSynthesis.speaking && activeSpeechUtterance.text === textToSpeak);
+
+        // 2. If this button is active, toggle its state (pause/cancel)
+        if (isThisButtonPlayingAudio) {
+          audio.pause();
+          playIcon.textContent = '▶️';
+          activeAudioElement = null;
+          return; // Action handled, exit
+        }
+        if (isThisButtonSpeakingNarration) {
+          window.speechSynthesis.cancel();
+          playIcon.textContent = '▶️';
+          activeSpeechUtterance = null;
+          return; // Action handled, exit
+        }
+
+        // 3. If another media is active, stop it first
+        if (activeAudioElement) {
+          activeAudioElement.pause();
+          activeAudioElement.currentTime = 0; // Rewind for next play
+          // Reset icon of the previously playing audio button
+          document.querySelectorAll('.play-button').forEach(btn => {
+            const btnAudio = btn.closest('.product-detail').querySelector('.product-audio');
+            if (btnAudio === activeAudioElement) {
+              btn.querySelector('span').textContent = '▶️';
+            }
+          });
+          activeAudioElement = null;
+        }
+        if (activeSpeechUtterance) { // Check if any narration was active
+          window.speechSynthesis.cancel();
+          // Reset icon of the previously speaking narration button
+          document.querySelectorAll('.play-button').forEach(btn => {
+            const btnProductDetail = btn.closest('.product-detail');
+            const btnTextToSpeak = `${btnProductDetail.querySelector('h2').textContent}. ${btnProductDetail.querySelector('.product-description').textContent}`;
+            if (activeSpeechUtterance.text === btnTextToSpeak) { // Find the button that started the activeUtterance
+                btn.querySelector('span').textContent = '▶️';
+            }
+          });
+          activeSpeechUtterance = null;
+        }
+        
+        // 4. Now, play this button's media (prioritize audio)
+        if (audio && audio.readyState >= 2) { // Audio available and loaded
+          audio.play()
+            .then(() => {
+              playIcon.textContent = '⏸️';
+              activeAudioElement = audio;
+            })
+            .catch(error => {
+              console.error("Audio play failed:", error);
+              playIcon.textContent = '▶️';
+              // Fallback to narration if audio fails to play
+              startNarration();
+            });
+        } else { // No audio or audio not ready, start narration
+          startNarration();
+        }
+
+        function startNarration() {
+          const utterance = new SpeechSynthesisUtterance(textToSpeak);
+          utterance.rate = 0.9;
+          utterance.pitch = 1.1;
+
+          // Get female voice if available (ensure voices are loaded)
+          const voices = window.speechSynthesis.getVoices();
+          const femaleVoice = voices.find(voice => voice.name.includes('female') || voice.name.includes('Female'));
+          if (femaleVoice) {
+            utterance.voice = femaleVoice;
+          }
+
+          utterance.onstart = () => {
+            playIcon.textContent = '🔊';
+            activeSpeechUtterance = utterance;
+          };
+          utterance.onend = () => {
+            playIcon.textContent = '▶️';
+            if (activeSpeechUtterance === utterance) { // Only clear if this was the one we tracked
+              activeSpeechUtterance = null;
+            }
+          };
+          utterance.onerror = (event) => {
+            console.error('SpeechSynthesisUtterance.onerror', event);
+            playIcon.textContent = '▶️';
+            if (activeSpeechUtterance === utterance) {
+              activeSpeechUtterance = null;
+            }
+          };
+          window.speechSynthesis.speak(utterance);
+        }
+      });
+
+      // Handle audio ending naturally
+      if (audio) {
+        audio.addEventListener('ended', () => {
+          playIcon.textContent = '▶️';
+          if (activeAudioElement === audio) { // Only clear if this was the audio we were tracking
+            activeAudioElement = null;
+          }
+        });
+      }
+    });
+
+    // To ensure voices are loaded for SpeechSynthesisUtterance
+    // This event fires when voices are loaded/changed
+    window.speechSynthesis.onvoiceschanged = () => {
+      // You can log here if needed for debugging, but no action necessary for core functionality
+    };
+
+    // Checkout functionality
+    function checkout(productName, price) {
+      alert(`Added ${productName} to cart for RM${price.toFixed(2)}`);
+    }
+  </script>
+</body>
+</html>

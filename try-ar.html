@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Try in AR - SweetAR Treats</title>
+  <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" href="assets/images/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+        "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+
+  <style>
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+    button {
+      margin: 1rem;
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background-color: #d94088;
+    }
+    #ar-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999;
+      background-color: black;
+    }
+    #marker-section img {
+      width: 300px;
+      border: 4px dashed #a83279;
+      border-radius: 12px;
+    }
+    .hidden { display: none !important; }
+    #stop-ar-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 10px 15px;
+      background-color: #ff69b4;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1002;
+      display: none; /* Initially hidden */
+    }
+  </style>
+</head>
+<body class="site-bg">
+  <div class="container">
+    <header class="icing-header">
+      <div class="icing-nav-inner">
+        <div class="hero-logo-title">
+          <a href="index.html" class="logo-link" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="assets/images/logo.png" alt="ARWhiplash Logo" class="hero-logo" />
+            <span class="hero-site-name">ARWhiplash</span>
+          </a>
+        </div>
+        <nav class="hero-nav">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="try-ar.html">Try in AR</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      window.addEventListener('scroll', function() {
+        const header = document.querySelector('.icing-header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    </script>
+
+    <main style="margin-top: 160px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+      <section id="marker-section-3d" class="marker-section">
+        <h2>Scan These Markers To Try 3D AR 🍩</h2>
+        <div class="marker-grid">
+          <div class="marker-item">
+            <img src="./assets/marker/frosted.jpg" alt="Frosted Donut Marker" />
+            <p>Frosted Donut</p>
+            <a href="./assets/marker/frosted.jpg" download="frosted_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+          <div class="marker-item">
+            <img src="./assets/marker/coco.jpg" alt="Chocolate Donut Marker" />
+            <p>Chocolate Donut</p>
+            <a href="./assets/marker/coco.jpg" download="chocolate_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+          <div class="marker-item">
+            <img src="./assets/marker/bubblegum.jpg" alt="Bubblegum Donut Marker" />
+            <p>Bubblegum Donut</p>
+            <a href="./assets/marker/bubblegum.jpg" download="bubblegum_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+          <div class="marker-item">
+            <img src="./assets/marker/cinnamon.jpg" alt="Cinnamon Donut Marker" />
+            <p>Cinnamon Donut</p>
+            <a href="./assets/marker/cinnamon.jpg" download="cinnamon_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="marker-section-2d" class="marker-section">
+        <h2>Scan These Markers To Try 2D AR 🎨</h2>
+        <div class="marker-grid">
+          <div class="marker-item">
+            <img src="./assets/marker/oreodonut.jpg" alt="Oreo Donut Marker" />
+            <p>Oreo Donut</p>
+            <a href="./assets/marker/oreodonut.jpg" download="oreo_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+          <div class="marker-item">
+            <img src="./assets/marker/greenteadonut.jpg" alt="Green Tea Donut Marker" />
+            <p>Green Tea Donut</p>
+            <a href="./assets/marker/greenteadonut.jpg" download="greentea_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+          <div class="marker-item">
+            <img src="./assets/marker/kinderdonut.jpg" alt="Kinder Donut Marker" />
+            <p>Kinder Donut</p>
+            <a href="./assets/marker/kinderdonut.jpg" download="kinder_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+          <div class="marker-item">
+            <img src="./assets/marker/blueberrydonut.jpg" alt="Blueberry Donut Marker" />
+            <p>Blueberry Donut</p>
+            <a href="./assets/marker/blueberrydonut.jpg" download="blueberry_donut_marker.jpg" class="marker-btn">📱 Download AR Marker</a>
+          </div>
+        </div>
+      </section>
+
+      <div style="margin: 3rem 0 2rem 0; text-align: center;">
+        <button id="start-ar-btn">✨ Start AR Experience</button>
+        <button id="stop-ar-btn" class="hidden">❌ Exit AR</button>
+      </div>
+
+      <div id="ar-container"></div>
+    </main>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>ARWhiplash</h3>
+        <p>Creating magical moments with our delicious donuts and treats. Made with love and the finest ingredients.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 ARWhiplash, Dessert City</li>
+          <li><i class="fas fa-phone"></i> +60 12-345-6789</li>
+          <li><i class="fas fa-envelope"></i> info@arwhiplash.com</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Opening Hours</h3>
+        <ul class="opening-hours">
+          <li>Monday - Friday: 8:00 AM - 8:00 PM</li>
+          <li>Saturday: 9:00 AM - 9:00 PM</li>
+          <li>Sunday: 10:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 ARWhiplash. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { MindARThree } from 'mindar-image-three';
+
+    const startBtn = document.getElementById('start-ar-btn');
+    const stopBtn = document.getElementById('stop-ar-btn');
+    const arContainer = document.getElementById('ar-container');
+    const markerSection3D = document.getElementById('marker-section-3d');
+    const markerSection2D = document.getElementById('marker-section-2d');
+
+    let mindarThree, renderer, scene, camera;
+    let models = {}; // Store all models
+    let isFullscreen = true;
+
+    if (startBtn) {
+      startBtn.addEventListener('click', async () => {
+        // Request camera permission first
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          stream.getTracks().forEach(track => track.stop()); // Release camera immediately
+        } catch (err) {
+          alert('Camera access is required to start AR.');
+          return;
+        }
+        document.querySelector('.icing-header').style.display = 'none';
+        startBtn.classList.add('hidden');
+        stopBtn.classList.remove('hidden');
+        stopBtn.style.display = 'block';
+        if (markerSection3D) markerSection3D.classList.add('hidden');
+        if (markerSection2D) markerSection2D.classList.add('hidden');
+        arContainer.style.display = 'block';
+
+        mindarThree = new MindARThree({
+          container: arContainer,
+          imageTargetSrc: "./assets/marker/mix.mind",
+        });
+
+        ({ renderer, scene, camera } = mindarThree);
+
+        const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+        scene.add(light);
+
+        const loader = new GLTFLoader();
+
+        // Load 3D models
+        const modelConfigs = [
+          { id: 0, path: './assets/models/frosted.glb', name: 'frosted' },
+          { id: 1, path: './assets/models/chocolate_donut.glb', name: 'chocolate_donut' },
+          { id: 2, path: './assets/models/bubblegum.glb', name: 'bubblegum' },
+          { id: 3, path: './assets/models/donut_c.glb', name: 'donut_c' }
+        ];
+
+        // Load 2D images
+        const imageConfigs = [
+          { id: 4, path: './assets/images/donutoreoflavor.jpg', name: 'oreo' },
+          { id: 5, path: './assets/images/greenteadonutflavor.jpg', name: 'greentea' },
+          { id: 6, path: './assets/images/kinderbuenodonutflavor.jpg', name: 'kinder' },
+          { id: 7, path: './assets/images/blueberrydonutflavor.jpg', name: 'blueberry' }
+        ];
+
+        // Load 3D models
+        modelConfigs.forEach(config => {
+          const anchor = mindarThree.addAnchor(config.id);
+          loader.load(config.path, (gltf) => {
+            const model = gltf.scene;
+            // Adjust scale based on model type
+            if (config.name === 'bubblegum') {
+              model.scale.set(2.4, 2.4, 2.4); // Extremely small scale for bubblegum
+              // Adjust position to ensure it's visible
+              model.position.set(0, 0, 0);
+              // Add rotation to ensure proper orientation
+              model.rotation.set(0, 0, 0);
+              // Log the model's properties for debugging
+              console.log('Bubblegum model loaded:', {
+                scale: model.scale,
+                position: model.position,
+                rotation: model.rotation,
+                boundingBox: new THREE.Box3().setFromObject(model)
+              });
+            } else if (config.name === 'donut_c') {
+              model.scale.set(2.5, 2.5, 2.5); // Larger scale for donut_c
+              // Adjust position to ensure it's visible
+              model.position.set(0, 0, 0);
+              // Add rotation to ensure proper orientation
+              model.rotation.set(0, 0, 0);
+            } else {
+              model.scale.set(0.5, 0.5, 0.5); // Default scale for other models
+            }
+            anchor.group.add(model);
+            models[config.name] = model;
+
+            // Add narration for 3D models
+            anchor.onTargetFound = () => {
+              let description = '';
+              switch(config.name) {
+                case 'frosted':
+                  description = "This is a frosted donut. A rich and fluffy treat with creamy filling.";
+                  break;
+                case 'chocolate_donut':
+                  description = "This is a chocolate donut. A decadent treat covered in rich chocolate glaze.";
+                  break;
+                case 'bubblegum':
+                  description = "This is a bubblegum donut. A fun and colorful treat with a sweet bubblegum flavor.";
+                  // Adjust model when target is found
+                  if (models.bubblegum) {
+                    models.bubblegum.scale.set(0.003, 0.003, 0.003);
+                    models.bubblegum.position.set(0, 0, 0);
+                    models.bubblegum.rotation.set(0, 0, 0);
+                  }
+                  break;
+                case 'donut_c':
+                  description = "This is a classic donut. A traditional treat with a perfect balance of sweetness.";
+                  break;
+              }
+              speakLoop(description);
+            };
+
+            anchor.onTargetLost = () => {
+              window.speechSynthesis.cancel(); // Stop narration
+              clearInterval(speakInterval);
+              // Reset model scale when target is lost
+              if (config.name === 'bubblegum' && models.bubblegum) {
+                models.bubblegum.scale.set(0.003, 0.003, 0.003);
+              }
+            };
+          });
+        });
+
+        // Load 2D images
+        imageConfigs.forEach(config => {
+          const anchor = mindarThree.addAnchor(config.id);
+          const texture = new THREE.TextureLoader().load(config.path);
+          const material = new THREE.MeshBasicMaterial({ map: texture });
+          const geometry = new THREE.PlaneGeometry(1, 1);
+          const image = new THREE.Mesh(geometry, material);
+          image.scale.set(1, 1, 1);
+          anchor.group.add(image);
+          models[config.name] = image;
+
+          // Add narration for 2D images
+          anchor.onTargetFound = () => {
+            let description = '';
+            switch(config.name) {
+              case 'oreo':
+                description = "This is an Oreo donut. A delicious treat with crushed Oreo cookies and creamy filling.";
+                break;
+              case 'greentea':
+                description = "This is a green tea donut. A unique treat with the refreshing taste of matcha green tea.";
+                break;
+              case 'kinder':
+                description = "This is a Kinder Bueno donut. A delightful treat with Kinder chocolate, white chocolate coating, and hazelnut filling.";
+                break;
+              case 'blueberry':
+                description = "This is a blueberry donut. A fruity treat with fresh blueberry flavor and jelly jam.";
+                break;
+            }
+            speakLoop(description);
+          };
+
+          anchor.onTargetLost = () => {
+            window.speechSynthesis.cancel(); // Stop narration
+            clearInterval(speakInterval);
+          };
+        });
+
+        await mindarThree.start();
+        renderer.setAnimationLoop(() => renderer.render(scene, camera));
+
+        // Animation loop
+        function animate() {
+          requestAnimationFrame(animate);
+          
+          // Rotate only 3D models (GLB files)
+          Object.entries(models).forEach(([name, model]) => {
+            // Only rotate if it's a 3D model (GLB file)
+            if (model && (name === 'frosted' || name === 'chocolate_donut' || name === 'bubblegum' || name === 'donut_c')) {
+              model.rotation.y += 0.01; // Adjust rotation speed here
+            }
+          });
+
+          // Update AR session
+          if (mindarThree) {
+            mindarThree.update();
+          }
+        }
+
+        // Start animation loop
+        animate();
+      });
+    }
+
+    // Function to speak text with a loop
+    let speakInterval;
+    const speakLoop = (text) => {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+      clearInterval(speakInterval);
+
+      const speak = () => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        // Get all available voices
+        const voices = window.speechSynthesis.getVoices();
+        // Try to find a female voice
+        const femaleVoice = voices.find(voice => 
+          voice.name.includes('Female') || 
+          voice.name.includes('female') || 
+          voice.name.includes('Samantha') ||
+          voice.name.includes('Microsoft Zira')
+        );
+        
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
+        }
+        
+        // Adjust voice characteristics
+        utterance.pitch = 1.2;  // Slightly higher pitch
+        utterance.rate = 0.9;   // Slightly slower rate
+        utterance.volume = 1.0; // Full volume
+        
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Initial speak
+      speak();
+
+      // Set up interval to repeat every 5 seconds
+      speakInterval = setInterval(speak, 5000);
+    };
+
+    // Initialize speech synthesis voices
+    if ('speechSynthesis' in window) {
+      // Load voices immediately if available
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        console.log('Available voices:', voices);
+      }
+
+      // Also set up the onvoiceschanged event
+      window.speechSynthesis.onvoiceschanged = () => {
+        const voices = window.speechSynthesis.getVoices();
+        console.log('Available voices:', voices);
+      };
+    }
+
+    async function stopAR() {
+      if (mindarThree) {
+        renderer.setAnimationLoop(null);
+        await mindarThree.stop();
+        renderer.dispose();
+        mindarThree = null;
+      }
+      document.querySelectorAll('.mindar-ui-overlay, .mindar-ui-scanner, .mindar-ui-loading').forEach(el => el.remove());
+      arContainer.innerHTML = '';
+      arContainer.style.display = 'none';
+      stopBtn.classList.add('hidden');
+      stopBtn.style.display = 'none';
+      startBtn.classList.remove('hidden');
+      if (markerSection3D) markerSection3D.classList.remove('hidden');
+      if (markerSection2D) markerSection2D.classList.remove('hidden');
+      document.querySelector('.icing-header').style.display = 'block';
+    }
+
+    stopBtn.addEventListener('click', stopAR);
+
+    const scaleModel = (model, scaleFactor) => {
+      if (!model) return;
+      const newScale = model.scale.x * scaleFactor;
+      // Add strict limits for bubblegum model
+      if (model === models.bubblegum) {
+        const clamped = Math.min(Math.max(newScale, 0.001), 0.005); // Very strict limits for bubblegum
+        model.scale.set(clamped, clamped, clamped);
+      } else {
+        const clamped = Math.min(Math.max(newScale, 0.2), 2);
+        model.scale.set(clamped, clamped, clamped);
+      }
+    };
+
+    // Add wheel event listener after renderer is initialized
+    if (renderer?.domElement) {
+      renderer.domElement.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.05 : 0.95;
+        Object.values(models).forEach(model => {
+          if (model?.parent?.visible) scaleModel(model, factor);
+        });
+      });
+    }
+
+    let initialPinchDistance = null;
+    if (renderer?.domElement) {
+      renderer.domElement.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2) {
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (initialPinchDistance === null) {
+            initialPinchDistance = distance;
+          } else {
+            const factor = distance > initialPinchDistance ? 1.02 : 0.98;
+            Object.values(models).forEach(model => {
+              if (model?.parent?.visible) scaleModel(model, factor);
+            });
+            initialPinchDistance = distance;
+          }
+        }
+      });
+
+      renderer.domElement.addEventListener('touchend', () => {
+        initialPinchDistance = null;
+      });
+    }
+
+    const burger = document.getElementById('burger');
+    const navMenu = document.getElementById('nav-menu');
+    burger.addEventListener('click', () => navMenu.classList.toggle('active'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About WhiplashAR Treats</title>
+  <link rel="stylesheet" href="styles/style.css?v=2" />
+    <link rel="icon" href="assets/images/logo.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes magic-glow {
+      0% {
+        text-shadow:
+          2px 2px 0 #fff,
+          -2px -2px 0 #fff,
+          2px -2px 0 #fff,
+          -2px 2px 0 #fff,
+          0 0 8px #ff4d6d,
+          0 2px 8px #fff;
+      }
+      50% {
+        text-shadow:
+          2px 2px 0 #fff,
+          -2px -2px 0 #fff,
+          2px -2px 0 #fff,
+          -2px 2px 0 #fff,
+          0 0 18px #ffb3c6,
+          0 2px 16px #fff6fa;
+      }
+      100% {
+        text-shadow:
+          2px 2px 0 #fff,
+          -2px -2px 0 #fff,
+          2px -2px 0 #fff,
+          -2px 2px 0 #fff,
+          0 0 12px #ff6eb5,
+          0 2px 12px #fff;
+      }
+    }
+
+    .icing-header {
+      width: 100%;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      margin-bottom: 0;
+      padding: 0 32px 0 0;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      background: none;
+    }
+
+    .icing-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('assets/images/icing-header.png') top center repeat-x;
+      background-size: 100% auto;
+      transition: all 0.3s ease;
+      z-index: -1;
+      opacity: 1;
+    }
+
+    .icing-header.scrolled {
+      background: none;
+    }
+
+    .icing-header.scrolled::before {
+      transform: translateY(-20px);
+      opacity: 1;
+    }
+
+    .hero-logo-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-logo {
+      height: 70px;
+      width: 70px;
+      object-fit: contain;
+      background: none;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(255, 77, 109, 0.10);
+      margin-left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hero-logo:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .hero-site-name {
+      font-family: 'Pacifico', cursive, sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffb3c6;
+      text-shadow:
+        2px 2px 0 #fff,
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        0 0 8px #ff4d6d,
+        0 2px 8px #fff;
+      letter-spacing: 0.5px;
+      margin-left: 0.5rem;
+      position: relative;
+      animation: magic-glow 2.5s infinite alternate;
+      transition: transform 0.2s;
+    }
+
+    .logo-link {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .logo-link:hover .hero-site-name {
+      transform: scale(1.08) rotate(-2deg);
+      filter: brightness(1.2) drop-shadow(0 0 12px #fff6fa);
+      animation: magic-glow 0.7s infinite alternate;
+    }
+
+    .hero-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .hero-nav a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      text-shadow: 1px 1px 8px #ff4d6d, 0 2px 8px #fff;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 8px 20px;
+      border-radius: 25px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-nav a:hover {
+      color: #fff;
+      text-shadow: 1px 1px 8px #ff4d6d, 0 2px 8px #fff;
+    }
+
+    main {
+      padding: 2rem;
+      margin-top: 160px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      padding: 3rem;
+      margin: 2rem auto;
+      box-shadow: 
+        0 8px 32px rgba(255, 77, 109, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      animation: fadeIn 1s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('assets/images/pattern.png') repeat;
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    .about-section h2 {
+      font-size: 3rem;
+      color: #ff4d6d;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      text-shadow: 
+        2px 2px 4px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 77, 109, 0.4);
+      position: relative;
+      z-index: 1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .about-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #1a1a1a;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ar-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2rem auto;
+      box-shadow: 
+        0 8px 32px rgba(255, 77, 109, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ar-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('assets/images/pattern.png') repeat;
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    #instruction {
+      max-width: 600px;
+      margin: 2rem auto;
+      font-size: 1.1rem;
+      color: #1a1a1a;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px rgba(255, 77, 109, 0.1);
+    }
+
+    #instruction a {
+      color: #ff4d6d;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.5rem;
+      background: rgba(255, 77, 109, 0.1);
+    }
+
+    #instruction a:hover {
+      color: #ff6eb5;
+      background: rgba(255, 77, 109, 0.2);
+      transform: translateY(-2px);
+    }
+
+    #instruction strong {
+      color: #ff4d6d;
+      font-weight: 700;
+    }
+
+    #start-button, #exit-button {
+      display: inline-block;
+      background: #ffb3c6;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border-radius: 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin: 1rem 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 4px 16px rgba(255, 77, 109, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    #start-button:hover, #exit-button:hover {
+      background: #ff6eb5;
+      color: #fff;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 8px 24px rgba(255, 77, 109, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    #exit-button {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    #ar-container {
+      position: fixed;
+      inset: 0;
+      display: none;
+      background: #000;
+      z-index: 9999;
+    }
+
+    @media (max-width: 900px) {
+      .icing-nav-inner {
+        padding: 0 1rem;
+        height: 70px;
+      }
+      .hero-logo {
+        height: 40px;
+        width: 40px;
+      }
+      .hero-site-name {
+        font-size: 1.1rem;
+      }
+      .hero-nav {
+        gap: 1rem;
+      }
+      .hero-nav a {
+        font-size: 1rem;
+        padding: 6px 15px;
+      }
+      .about-section {
+        padding: 2rem 1.5rem;
+      }
+      .about-section h2 {
+        font-size: 2.5rem;
+      }
+      .about-section p {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .icing-nav-inner {
+        flex-direction: column;
+        height: auto;
+        gap: 0.3rem;
+        padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+      }
+      .hero-nav {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-nav a {
+        font-size: 0.9rem;
+        padding: 5px 12px;
+      }
+      .about-section h2 {
+        font-size: 2rem;
+      }
+      .about-section p {
+        font-size: 1rem;
+      }
+      #instruction {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <script>
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.icing-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</head>
+<body class="site-bg">
+  <header class="icing-header">
+    <div class="icing-nav-inner">
+      <div class="hero-logo-title">
+        <a href="index.html" class="logo-link" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="assets/images/logo.png" alt="ARWhiplash Logo" class="hero-logo" />
+          <span class="hero-site-name">ARWhiplash</span>
+        </a>
+      </div>
+      <nav class="hero-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="try-ar.html">Try in AR</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-section">
+      <h2>We Bake, You Explore! 🍰✨</h2>
+      <p>Welcome to WhiplashAR Treats, where we blend the art of baking with cutting-edge Augmented Reality technology. Our mission is to revolutionize how you experience desserts by bringing them to life right before your eyes!</p>
+      <p>From decadent cheesecakes to molten lava cakes, each of our treats comes with its own AR experience. Simply scan our markers with your device, and watch as your favorite desserts appear in stunning 3D, complete with interactive elements and mouthwatering details.</p>
+    </section>
+
+    <section class="ar-section">
+      <h2>Try Our AR Experience! 🎯</h2>
+      <div id="instruction">
+        <p>
+          👉 First, <a href="assets/images/adsimage.jpg" download>download this marker image</a> and display it on your screen or print it out.<br>
+          Then click <strong>Start AR</strong> below and point your camera at the image to watch the magic happen! ✨
+        </p>
+      </div>
+      <button id="start-button">🎥 Start AR Experience</button>
+      <button id="exit-button">❌ Exit AR</button>
+      <div id="ar-container"></div>
+    </section>
+  </main>
+    <!-- Dependencies: A-Frame & MindAR (bundled with THREE) -->
+<script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-three.prod.js"></script>
+
+<script>
+/* ---------- DOM references ---------- */
+const startBtn  = document.getElementById('start-button');
+const exitBtn   = document.getElementById('exit-button');
+const arDiv     = document.getElementById('ar-container');
+
+/* ---------- runtime vars ---------- */
+let mindar, video, plane;
+
+/* ---------- helper to build AR once ---------- */
+async function buildAR() {
+
+  /* 1. MindAR setup */
+  mindar = new window.MINDAR.IMAGE.MindARThree({
+    container: arDiv,
+    imageTargetSrc: 'assets/targets/ads.mind',
+    uiScanning:  true,
+    uiLoading:  'no'
+  });
+  const {renderer, scene, camera} = mindar;
+
+  /* 2. Video element – but DO NOT play yet */
+  video = document.createElement('video');
+  video.src = 'assets/videos/ads.mp4';
+  video.crossOrigin = 'anonymous';
+  video.loop  = true;
+  video.muted = false;          // you want sound
+  video.playsInline = true;
+
+  /* Wait only for metadata so we know aspect-ratio – NO autoplay */
+  await new Promise(res => {
+    video.addEventListener('loadedmetadata', res, {once:true});
+  });
+
+  /* 3. Video texture + plane (hidden initially) */
+  const THREE = window.MINDAR.IMAGE.THREE;
+  const aspect = video.videoHeight / video.videoWidth || (204/480); // fallback ratio
+  const geometry = new THREE.PlaneGeometry(1, aspect);
+  const texture  = new THREE.VideoTexture(video);
+  const material = new THREE.MeshBasicMaterial({map:texture});
+  plane = new THREE.Mesh(geometry, material);
+  plane.visible = false;
+
+  /* 4. Anchor */
+  const anchor = mindar.addAnchor(0);
+  anchor.group.add(plane);
+
+  anchor.onTargetFound = () => {
+    plane.visible = true;
+    video.currentTime = 0;   // start from beginning (optional)
+    video.play();
+  };
+  anchor.onTargetLost = () => {
+    video.pause();
+    plane.visible = false;
+  };
+
+  /* 5. Start MindAR engine */
+  await mindar.start();
+  renderer.setAnimationLoop(() => renderer.render(scene, camera));
+}
+
+/* ---------- UI handlers ---------- */
+startBtn.addEventListener('click', async () => {
+  startBtn.style.display = 'none';
+  exitBtn.style.display  = 'inline-block';
+  arDiv.style.display    = 'block';
+
+  if (!mindar) await buildAR();  // build only once
+});
+
+exitBtn.addEventListener('click', async () => {
+  if (mindar) await mindar.stop();
+  if (video)  video.pause();
+  arDiv.style.display   = 'none';
+  exitBtn.style.display = 'none';
+  startBtn.style.display= 'inline-block';
+});
+
+  const burger = document.getElementById('burger');
+  const navMenu = document.getElementById('nav-menu');
+
+  burger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+
+</script>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>ARWhiplash</h3>
+        <p>Creating magical moments with our delicious donuts and treats. Made with love and the finest ingredients.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 ARWhiplash, Dessert City</li>
+          <li><i class="fas fa-phone"></i> +60 12-345-6789</li>
+          <li><i class="fas fa-envelope"></i> info@arwhiplash.com</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Opening Hours</h3>
+        <ul class="opening-hours">
+          <li>Monday - Friday: 8:00 AM - 8:00 PM</li>
+          <li>Saturday: 9:00 AM - 9:00 PM</li>
+          <li>Sunday: 10:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 ARWhiplash. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
