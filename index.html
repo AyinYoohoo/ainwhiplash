@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WhiplashAR - Home</title>
+  <link rel="stylesheet" href="styles/style.css?v=2">
+    <link rel="icon" href="assets/images/logo.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script>
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.icing-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+  <style>
+    /* Embedded Footer Styles */
+    body {
+      position: relative;
+    }
+
+    .hero-main {
+      position: relative;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      background: url('assets/images/frontpage.jpg') center/cover no-repeat fixed;
+      margin-bottom: 0;
+    }
+
+    .hero-main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+      z-index: 0;
+    }
+
+    .hero-cta {
+      margin-top: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-cta-desc {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    }
+
+    .shop-now-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+    }
+
+    .shop-now-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+      background: linear-gradient(45deg, #ff3d5d, #ff7f93);
+    }
+
+    .shop-now-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .shop-now-btn:hover i {
+      transform: translateX(5px);
+    }
+
+    @media (max-width: 768px) {
+      .hero-cta-desc {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+      
+      .shop-now-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+      }
+    }
+
+    .footer {
+        background: rgba(255, 105, 180, 0.6) !important; /* Stronger but aesthetic pink */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 4rem 0 0;
+        margin-top: 0;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(255, 105, 180, 0.9), rgba(255, 182, 193, 0.8), transparent);
+        animation: gradientFlow 4s linear infinite;
+    }
+
+    @keyframes gradientFlow {
+        0% { background-position: 0% 0; }
+        100% { background-position: 100% 0; }
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 3.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .footer-section {
+        position: relative;
+        padding: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .footer-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-section h3 {
+        color: #fff;
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.8rem;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer-section h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, rgba(255, 105, 180, 1), rgba(255, 182, 193, 0.9));
+        border-radius: 2px;
+        transition: width 0.3s ease;
+    }
+
+    .footer-section:hover h3::after {
+        width: 90px;
+    }
+
+    .footer-section p {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1.2rem;
+    }
+
+    .social-link {
+        color: #fff;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-link:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-5px) scale(1.05);
+        color: #ffb6c1;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer-links,
+    .contact-info,
+    .opening-hours {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li,
+    .contact-info li,
+    .opening-hours li {
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+    }
+
+    .footer-links a {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+        position: relative;
+        padding-left: 1.5rem; /* Space for icon */
+    }
+
+    .footer-links a::before {
+        content: '\2022'; /* Bullet point */
+        position: absolute;
+        left: 0;
+        color: rgba(255, 105, 180, 1); /* Solid pink bullet */
+        font-weight: bold;
+        font-size: 1.2em;
+        top: -2px;
+    }
+
+    .footer-links a:hover {
+        color: rgba(255, 105, 180, 1);
+        transform: translateX(8px);
+    }
+
+    .contact-info li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .contact-info i {
+        color: #ff69b4;
+        font-size: 1.1rem;
+        margin-top: 0.2rem;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding: 2.5rem 0;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 105, 180, 0.4) !important; /* Stronger pink for bottom */
+    }
+
+    .footer-bottom p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+    /* Responsive Footer */
+    @media (max-width: 992px) {
+        .footer-content {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .footer {
+            padding: 3rem 0 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 0 1.5rem;
+        }
+
+        .footer-section {
+            text-align: center;
+        }
+
+        .footer-section h3::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .social-links,
+        .footer-links,
+        .contact-info,
+        .opening-hours {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-links a {
+            padding-left: 0;
+        }
+
+        .footer-links a::before {
+            display: none;
+        }
+
+        .contact-info li {
+            flex-direction: column;
+            text-align: center;
+            gap: 0.2rem;
+        }
+
+        .contact-info i {
+            margin-top: 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .footer-section h3 {
+            font-size: 1.4rem;
+        }
+
+        .footer-section p,
+        .footer-links li,
+        .contact-info li,
+        .opening-hours li {
+            font-size: 0.9rem;
+        }
+
+        .social-link {
+            width: 38px;
+            height: 38px;
+            font-size: 1.4rem;
+        }
+    }
+
+    .video-section {
+      position: relative;
+      width: 100%;
+      padding: 3rem 2rem;
+      background: url('assets/images/frontpage.jpg') center/cover no-repeat fixed;
+      margin-top: 100vh; /* Push it below the Swiper */
+    }
+
+    .video-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+      z-index: 0;
+    }
+
+    .hero-video-wrapper {
+      position: relative;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(255,77,109,0.25);
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-video-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 192, 203, 0.1);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 0;
+    }
+
+    .hero-video-wrapper video {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      border-radius: 1.5rem;
+      box-shadow: none;
+      transition: all 0.3s ease;
+      background-color: transparent !important;
+    }
+
+    .hero-video-wrapper video:hover {
+      transform: scale(1.02);
+    }
+
+    .swiper.mySwiper {
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      margin: 0;
+      box-shadow: none;
+    }
+
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .swiper-pagination, .swiper-button-next, .swiper-button-prev {
+      z-index: 2;
+    }
+
+    .swiper-pagination {
+      bottom: 20px !important;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+      color: #fff;
+      filter: drop-shadow(0 2px 8px #0008);
+      width: 40px;
+      height: 40px;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+      font-size: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .swiper.mySwiper {
+        height: 50vh;
+      }
+
+      .swiper-button-next, .swiper-button-prev {
+        width: 30px;
+        height: 30px;
+      }
+
+      .swiper-button-next:after, .swiper-button-prev:after {
+        font-size: 18px;
+      }
+
+      .swiper-pagination {
+        bottom: 10px !important;
+      }
+    }
+
+    .icing-header {
+      z-index: 1000;
+    }
+
+    .video-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #333;
+      text-align: center;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+      background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .video-title .highlight {
+      display: inline-block;
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    .video-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+      font-weight: 500;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(15deg); }
+    }
+
+    @media (max-width: 768px) {
+      .video-title {
+        font-size: 2rem;
+        padding: 0 1rem;
+      }
+      .video-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+    }
+
+    .hero-nav a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      text-shadow: 1px 1px 8px #ff4d6d, 0 2px 8px #fff;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 8px 20px;
+      border-radius: 25px;
+      border: 2px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-nav a:hover {
+      color: #fff;
+      text-shadow: 1px 1px 8px #ff4d6d, 0 2px 8px #fff;
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .icing-header.scrolled .hero-nav a {
+      font-size: 1rem;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .icing-header.scrolled .hero-nav a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="doughnut-bg">
+  <header class="icing-header">
+    <div class="icing-nav-inner">
+      <div class="hero-logo-title">
+        <a href="index.html" class="logo-link" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="assets/images/logo.png" alt="ARWhiplash Logo" class="hero-logo" />
+          <span class="hero-site-name">ARWhiplash</span>
+        </a>
+      </div>
+      <nav class="hero-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="try-ar.html">Try in AR</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main class="hero-main">
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="assets/images/banner-1.png" alt="Banner 1"></div>
+        <div class="swiper-slide"><img src="assets/images/banner-2.png" alt="Banner 2"></div>
+        <div class="swiper-slide"><img src="assets/images/banner-3.png" alt="Banner 3"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+    <!-- Video Section -->
+    <section class="video-section">
+      <h2 class="video-title">Experience the Magic of AR Shopping <span class="highlight">✨</span></h2>
+      <p class="video-subtitle">Watch how we transform your shopping experience with cutting-edge augmented reality technology</p>
+      <div class="hero-video-wrapper">
+        <video loop playsinline controls>
+          <source src="assets/videos/intro.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="hero-cta">
+        <p class="hero-cta-desc">Discover our collection of amazing products and try them in AR!</p>
+        <a href="products.html" class="shop-now-btn">Shop Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper', {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 0
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 0
+        }
+      }
+    });
+  </script>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>ARWhiplash</h3>
+        <p>Creating magical moments with our delicious donuts and treats. Made with love and the finest ingredients.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 ARWhiplash, Dessert City</li>
+          <li><i class="fas fa-phone"></i> +60 12-345-6789</li>
+          <li><i class="fas fa-envelope"></i> info@arwhiplash.com</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Opening Hours</h3>
+        <ul class="opening-hours">
+          <li>Monday - Friday: 8:00 AM - 8:00 PM</li>
+          <li>Saturday: 9:00 AM - 9:00 PM</li>
+          <li>Sunday: 10:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 ARWhiplash. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
