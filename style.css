@@ -1,0 +1,84 @@
+/* Header styling for both index.html and try-ar.html */
+.icing-header {
+    background-image: url('assets/images/icing-header.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.icing-nav-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    z-index: 10;
+}
+
+.hero-logo-title {
+    display: flex;
+    align-items: center;
+}
+
+.hero-logo {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.hero-site-name {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.hero-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-nav a:hover {
+    color: #ff69b4;
+}
+
+/* Responsive header */
+@media (max-width: 768px) {
+    .icing-header {
+        height: 150px;
+    }
+    
+    .icing-nav-inner {
+        padding: 15px 20px;
+    }
+
+    .hero-nav {
+        gap: 10px;
+    }
+
+    .hero-nav a {
+        font-size: 1em;
+    }
+
+    .hero-logo {
+        height: 40px;
+    }
+
+    .hero-site-name {
+        font-size: 1.2em;
+    }
+} 
